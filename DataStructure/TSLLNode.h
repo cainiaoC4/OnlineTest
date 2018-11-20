@@ -16,7 +16,7 @@ public:
 	}
 
 	T info;
-	TSLLNode *next;
+	TSLLNode<T> *next;
 };
 
 template<typename T>

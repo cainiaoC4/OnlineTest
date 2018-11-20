@@ -22,14 +22,15 @@ int main()
 	//A.showAll();
 
 
-	TSLList<float> A;
+	/*TSLList<float> A;
 
 
 	A.addToHead(1.2f);
 	A.addToTail(2.3f);
 	A.addToTail(4.7f);
 	A.addToTail(5.5f);
-	A.showAll();
+	A.showAll();*/
+
 	//cout << p->info << endl;
 	return 0;
 }

@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STLStudy", "STLStudy\STLStu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructure", "DataStructure\DataStructure.vcxproj", "{3FCF2B83-BBC9-4D93-B45D-A06C285F0CF6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SthTest", "SthTest\SthTest.vcxproj", "{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{3FCF2B83-BBC9-4D93-B45D-A06C285F0CF6}.Release|x64.Build.0 = Release|x64
 		{3FCF2B83-BBC9-4D93-B45D-A06C285F0CF6}.Release|x86.ActiveCfg = Release|Win32
 		{3FCF2B83-BBC9-4D93-B45D-A06C285F0CF6}.Release|x86.Build.0 = Release|Win32
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Debug|x64.ActiveCfg = Debug|x64
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Debug|x64.Build.0 = Debug|x64
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Debug|x86.ActiveCfg = Debug|Win32
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Debug|x86.Build.0 = Debug|Win32
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Release|x64.ActiveCfg = Release|x64
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Release|x64.Build.0 = Release|x64
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Release|x86.ActiveCfg = Release|Win32
+		{F093E5BD-C7D4-4C87-A8CE-1FD95AD0DF38}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

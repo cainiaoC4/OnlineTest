@@ -2,6 +2,7 @@
 #include"IntSLList.h"
 
 #include"TSLLNode.h"
+#include"TSLList.h"
 #include <iostream>
 using namespace std;
 
@@ -20,9 +21,16 @@ int main()
 	////A.deleteNode(1);
 	//A.showAll();
 
-	TSLLNode<int>*p =new TSLLNode<int>(1);
-	//p->next = new TSLLNode<float>(2.3f);
 
-	cout << p->info << endl;
+	/*TSLList<float> A;
+
+
+	A.addToHead(1.2f);
+	A.addToTail(2.3f);
+	A.addToTail(4.7f);
+	A.addToTail(5.5f);
+	A.showAll();*/
+
+	//cout << p->info << endl;
 	return 0;
 }

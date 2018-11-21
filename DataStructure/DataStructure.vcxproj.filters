@@ -27,6 +27,9 @@
     <ClCompile Include="TSLLNode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TSLList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IntSLLNode.h">
@@ -36,6 +39,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TSLLNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TSLList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

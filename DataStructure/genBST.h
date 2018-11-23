@@ -79,6 +79,7 @@ public:
 	void iterativeInorder();
 	void iterativePostorder();
 	void MorrisInorder();
+	void MorrusPreorder();
 	void insert(const T&);
 	void deleteByMerging(BSTNode<T>*&);
 	void findAndDeleteByMerging(const T&);
@@ -266,6 +267,7 @@ inline void BST<T>::iterativePostorder()
 template<class T>
 inline void BST<T>::MorrisInorder()
 {  //Morris  ÖÐÐò±éÀú
+   // see: http://note.youdao.com/noteshare?id=72fb0dc580f38af8367ebfa155e45187&sub=6AF1326CF6454A4C81171D9B66F64113
 
 	BSTNode<T> *p = root, *tmp;
 	while (p != 0)
@@ -273,7 +275,7 @@ inline void BST<T>::MorrisInorder()
 		if (p->left == 0)  //no left tree ? turn to right tree
 		{
 			visit(p);
-			p = p->right;
+			p = p->right;           //back to father
 		}
 		else {
 			tmp = p->left;
@@ -282,11 +284,42 @@ inline void BST<T>::MorrisInorder()
 
 			if (tmp->right == 0)
 			{
-				tmp->right = p;
+				tmp->right = p;               //let father be right
 				p = p->left;
 			}
 			else {
 				visit(p);
+				tmp->right = 0;
+				p = p->right;
+			}
+		}
+	}
+}
+
+template<class T>
+inline void BST<T>::MorrusPreorder()
+{
+	BSTNode<T> *p = root, *tmp;
+	while (p != 0)
+	{
+		if (p->left == 0)  //no left tree ? turn to right tree
+		{
+			visit(p);
+			p = p->right;           //back to father
+		}
+		else {
+			tmp = p->left;
+			while (tmp->right != 0 && tmp->right != p)
+				tmp = tmp->right;
+
+			if (tmp->right == 0)
+			{
+				visit(p);
+				tmp->right = p;               //let father be right
+				p = p->left;
+				
+			}
+			else {
 				tmp->right = 0;
 				p = p->right;
 			}

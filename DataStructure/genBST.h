@@ -253,3 +253,43 @@ inline void BST<T>::iterativePostorder()
 		p = p->right;
 	}
 }
+
+
+
+//Morris Inorder   Break the structure
+//While 
+//  if this node has no left child
+//     visit this node
+//     turn to right child
+//  else let this node become left child tree's most right node's right child
+//       turn to this left child tree
+template<class T>
+inline void BST<T>::MorrisInorder()
+{  //Morris  ÖÐÐò±éÀú
+
+	BSTNode<T> *p = root, *tmp;
+	while (p != 0)
+	{
+		if (p->left == 0)  //no left tree ? turn to right tree
+		{
+			visit(p);
+			p = p->right;
+		}
+		else {
+			tmp = p->left;
+			while (tmp->right != 0 && tmp->right != p)
+				tmp = tmp->right;
+
+			if (tmp->right == 0)
+			{
+				tmp->right = p;
+				p = p->left;
+			}
+			else {
+				visit(p);
+				tmp->right = 0;
+				p = p->right;
+			}
+		}
+	}
+}

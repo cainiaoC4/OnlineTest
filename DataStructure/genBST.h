@@ -326,3 +326,30 @@ inline void BST<T>::MorrusPreorder()
 		}
 	}
 }
+
+template<class T>
+inline void BST<T>::insert(const T &el)
+{
+	BSTNode<T>*p = root,*prev=0;
+	while (p != 0) {
+		prev = p;
+		if (el < p->el)    // if el <p->el  search the left child tree
+		{ 
+			p = p->left;       
+		}
+		else {             //search the right child tree
+			p = p->right;
+		} 
+	}    // now if root isnot 0 ,find the right position  ( p == 0 mean prev->left==0 or prev-> right==0 )
+
+	if (root = 0)          //empty tree
+		root = new BSTNode<T>(el);
+	else if (el < prev->el)                 //  insert the el
+	{
+		prev->left = new BSTNode<T>(el);
+	}
+	else {
+		prev->right = new BSTNode<T>(el);
+	}
+
+}

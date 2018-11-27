@@ -40,7 +40,7 @@ vector<int>& decode(vector<int> &el)
 	{
 		int index = iter - el.begin();
 		el[index] = el[index] ^ Key(index);
-		cout << el[index] << endl;
+		cout << char(el[index]) << endl;
 	}
 
 	return el;
@@ -102,7 +102,9 @@ int main()
 	istream_iterator<int>i1(cin), i2;
 	vector<int> A(i1,i2);	
 	
-	decode_1(decode_0(A));
+	/*decode_1(decode_0(A));
+	decode_0(decode_1(A));*/
+	decode_1(A);
 	//decode(A);
 	
 	

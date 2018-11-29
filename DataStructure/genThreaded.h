@@ -33,6 +33,28 @@ protected:
 };
 
 template<class T>
+inline void ThreadedTree<T>::insert(const T &el)
+{
+	ThreadedNode<T>*p, *prev = 0, *newNode;
+	NewNode = new ThreadedNode<T>(el);
+
+	if (root == 0)
+	{
+		root = newNode;
+		return;
+	}
+
+	p = root;
+
+	while (p != 0) {
+
+		prev = p;
+		if(p->el>el)
+	}
+
+}
+
+template<class T>
 inline void ThreadedTree<T>::inorder()
 {
 	ThreadedNode<T>*prev, *p = root;

@@ -80,6 +80,13 @@ public:
 	void iterativePostorder();
 	void MorrisInorder();
 	void MorrusPreorder();
+
+	void reverse(BSTNode<T>*from, BSTNode<T>*to);
+	void printReverse(BSTNode<T>*from, BSTNode<T>*to);
+
+	void MorrisPostorder();
+
+
 	void insert(const T&);
 	void deleteByMerging(BSTNode<T>*&);
 	void findAndDeleteByMerging(const T&);
@@ -326,3 +333,191 @@ inline void BST<T>::MorrusPreorder()
 		}
 	}
 }
+
+template<class T>
+inline void BST<T>::reverse(BSTNode<T>* from, BSTNode<T>* to)
+{  //将  t->right 链倒序
+	if (from == to)         //only one node
+		return;
+	BSTNode<T> *x = from, *y = from->right, *z;
+
+	while (true)
+	{
+		z = y->right;
+		y->right = x;
+		x = y;
+		y = z;
+		if (x == to)
+		{
+			break;
+		}
+	}
+}
+
+template<class T>
+void BST<T>::printReverse(BSTNode<T>* from, BSTNode<T>* to)
+{
+	reverse(from, to);
+
+	BSTNode<T>*p = to;
+
+	while (true)
+	{
+		visit(p);
+		if (p == from) {               //only one node
+			break;
+		}
+		p = p->right;
+	}
+
+	reverse(to, from);
+}
+
+template<class T>
+void BST<T>::MorrisPostorder()
+{
+	BSTNode<T> dump(0);
+
+	dump.left = root;
+
+	BSTNode<T> *curr = &dump, *prev = 0;
+
+	while (cur)
+	{
+		if (curr->left == 0)                        //到达最左节点
+		{
+			curr = curr->right;
+		}
+		else {
+			prev = curr->left;
+
+			while (prev->right != 0 && prev->right != curr)                //寻找右子树的最右节点
+				prev = prev->right;
+
+
+			if (prev->right == 0)
+			{
+				prev->right = curr;
+				curr = curr->left;
+			}
+			else {
+
+				printReverse(curr->left, prev);
+				prev->right = 0;
+				curr = curr->right;
+			}
+
+		}
+
+	}
+
+}
+
+template<class T>
+void BST<T>::insert(const T &)
+{
+	BSTNode<T>*p = root, *prev = 0;
+	while (p != 0) {
+		prev = p;
+		if (el < p->el)
+		{
+			p=p->left;
+		}
+		else {
+			p = p->right;
+		}
+	}
+	if (root == 0) {
+		root = new BSTNode<T>(el);
+	}
+	else if (el < prev->el) {
+		prev->left = new BSTNode<T>(el);
+	}
+	else {
+		prev->right = new BSTNode<T>(el);
+	}
+}
+
+template<class T>
+void BST<T>::deleteByMerging(BSTNode<T>*&node)
+{//合并删除
+
+	BSTNode<T>*tmp = node;
+
+	if (node != 0)
+	{
+		if (!node->right)                   //没有右孩子，左子树将被贴到其父节点上
+		{
+			node = node->left;
+		} 
+		else if(node->left==0)               //没有左孩子，右子树将被贴到其父节点上
+		{
+			node = node->right;
+		}
+		else {
+			tmp = node->left;
+
+			while (tmp->right != 0)     //查询node左子树的最右节点
+			{
+				tmp = tmp->right;
+			}
+
+			tmp->right = node->right;   //节点右子树被贴到左子树的最右节点的右孩子处。
+
+			tmp = node;
+
+			node = node->left;       //node左子树贴到父节点处
+			
+		}
+
+		delete tmp;
+
+	}
+
+}
+
+template<class T>
+void BST<T>::findAndDeleteByMerging(const T &el)
+{//
+
+	BSTNode<T> *node = root, *prev = 0;
+
+	while (node != 0)
+	{
+		if (node->el == el)
+			break;
+
+		prev = node;
+		if (node->el < el)
+		{
+			node=node->right
+		}
+		else
+		{
+			node = node->left;
+		}
+	}
+
+	if (node != 0 && node->el == el)
+	{
+		if(node==root)
+		{
+			deleteByMerging(root);
+		}
+		else if (prev->left == node)
+		{
+			deleteByMerging(prev->left);
+		}
+		else {
+			deleteByMerging(prev->right);
+		}
+	}
+	else if(root!=0) {
+		cout << "Key" << el << "is not in the tree\n";
+	}
+	else {
+		cout << "the tree is empty\n";
+	}
+}
+
+

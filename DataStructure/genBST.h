@@ -414,7 +414,7 @@ void BST<T>::MorrisPostorder()
 }
 
 template<class T>
-void BST<T>::insert(const T &)
+void BST<T>::insert(const T &el)
 {
 	BSTNode<T>*p = root, *prev = 0;
 	while (p != 0) {
@@ -440,7 +440,7 @@ void BST<T>::insert(const T &)
 
 template<class T>
 void BST<T>::deleteByMerging(BSTNode<T>*&node)
-{//合并删除
+{//合并删除  ,可能导致树的高度升高或降低
 
 	BSTNode<T>*tmp = node;
 
@@ -482,7 +482,8 @@ void BST<T>::findAndDeleteByMerging(const T &el)
 
 	BSTNode<T> *node = root, *prev = 0;
 
-	while (node != 0)
+	////find that node 
+	while (node != 0)                           //试图于从被删除节点的父节点的左或者右指针数据成员中访问节点。
 	{
 		if (node->el == el)
 			break;
@@ -498,13 +499,16 @@ void BST<T>::findAndDeleteByMerging(const T &el)
 		}
 	}
 
-	if (node != 0 && node->el == el)
+
+	//
+
+	if (node != 0 && node->el == el)     
 	{
-		if(node==root)
+		if(node==root)                      
 		{
 			deleteByMerging(root);
 		}
-		else if (prev->left == node)
+		else if (prev->left == node)                // that node is prev's left child ,
 		{
 			deleteByMerging(prev->left);
 		}
@@ -517,6 +521,68 @@ void BST<T>::findAndDeleteByMerging(const T &el)
 	}
 	else {
 		cout << "the tree is empty\n";
+	}
+}
+
+template<class T>
+void BST<T>::deleteByCopying(BSTNode<T>*& node)
+{  
+	//复制删除。         //不对称，因为总是删除node中键值的直接前驱节点，降低了左子树高度，在执行插入操作后，右子树高度增加
+	BSTNode<T> *previous, *tmp = node;
+
+	if (node->right == 0) {                //右子树为空，则将左孩子覆盖到node
+ 		node = node->left;
+	}
+	else if(node->left ==0)               //左子树为空，将右孩子覆盖到node
+	{
+		node = node->right;
+	}
+	else {                                //
+		tmp = node->left;
+		previous = node;
+
+		while (tmp->right != 0)         //查询node左子树的最右节点及其父节点previous
+		{
+			previous = tmp;
+			tmp = tmp->right;
+		}
+
+		node->el = tmp->el;             //左子树最右节点的键值赋值给被删除节点。
+
+		if (previous == node)           //node->left 没有右子树
+		{
+			previous->left = tmp->left;             //将node左子树的最右节点的左子树 接到node左指针处。
+		}
+		else {
+			previous->right = tmp->left;            //node左子树的最右节点的左子树接到最右节点的右指针处。
+		}
+	}
+	delete tmp;
+
+
+}
+
+
+
+template<class T>
+void BST<T>::balance(T data[], int first, int last)
+{
+	//树中任一节点的两个子树的高度差为0或者1，该二叉树就是高度平衡的。
+	//10000个元素存储在完全平衡树中，树的高度就是lg(10001) =13.289 =14
+
+	//当数据到达时，将其全部存储在一个数组中，用某种高效算法对数组进行排序！
+
+	//将数组中间的元素指定为根，产生两个子数组，分别balance迭代
+
+	//缺陷是在创建树之前，所有数据必须放在数组中，这些数据可以直接输入到数组中，当必须使用树，但是准备保存到树中的数据仍然在输入的时候就不合适了。
+	//可以通过中序遍历将不平衡树的数据传送到数组中，删除原树，使用balance重新创建树就OK了。
+	if (first <= last)
+	{
+		int middle = (first + last) / 2;
+
+		insert(data[middle]);
+		balance(data, first, middle - 1);
+		balance(data, middle + 1, last);
 	}
 }
 

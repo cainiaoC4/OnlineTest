@@ -95,7 +95,7 @@ void SplayTree<T>::insert(const T &el)
 
 	if ((newNode = new SplayingNode<T>(el, 0, 0, prev)) == 0)
 	{
-		std::cout << "No room for new nodes\n";
+		std::cerr << "No room for new nodes\n";
 		exit(1);
 	}
 
@@ -133,7 +133,7 @@ template<class T>
 void SplayTree<T>::continueRotation(SplayingNode<T>* gr, SplayingNode<T>* par, SplayingNode<T>* ch, SplayingNode<T>* desc)
 {
 	if (gr != 0) {
-		if (gr->right == ch->parent)
+		if (gr->right == ch->parent)   //
 			gr->right = ch;
 		else
 			gr->left = ch;
@@ -163,25 +163,25 @@ void SplayTree<T>::semisplay(SplayingNode<T>* p)
 				rotateL(p);
 			}
 		}
-		else if (p->parent->left == p)
+		else if (p->parent->left == p)                      //p为其父节点的左子节点
 		{
-			if (p->parent->parent->left == p->parent)
+			if (p->parent->parent->left == p->parent)       //同构 左
 			{
 				rotateR(p->parent);
 				p = p->parent;
 			}
-			else {
+			else {                                          //异构   父节点为祖父节点的右子节点
 				rotateR(p);
 				rotateL(p);
 			}
 		}
 		else {
-			if (p->parent->parent->right == p->parent)
+			if (p->parent->parent->right == p->parent)       //p为其父节点的右子节点，同构  右
 			{
-				rotateL(p->parent);
+				rotateL(p->parent);                       
 				p = p->parent;
 			}
-			else {
+			else {                                           //异构  父节点为祖父节点的左子节点
 				rotateL(p);
 				rotateR(p);
 			}

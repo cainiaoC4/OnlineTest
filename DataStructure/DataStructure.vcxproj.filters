@@ -30,6 +30,9 @@
     <ClCompile Include="TSLList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="splay.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IntSLLNode.h">
@@ -48,6 +51,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="genThreaded.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="genSplay.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

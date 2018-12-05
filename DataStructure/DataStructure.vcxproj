@@ -146,11 +146,13 @@
     <ClCompile Include="IntSLList.cpp" />
     <ClCompile Include="IntSLLNode.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="splay.cpp" />
     <ClCompile Include="TSLList.cpp" />
     <ClCompile Include="TSLLNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="genBST.h" />
+    <ClInclude Include="genSplay.h" />
     <ClInclude Include="genThreaded.h" />
     <ClInclude Include="IntSLList.h" />
     <ClInclude Include="IntSLLNode.h" />

@@ -1,6 +1,6 @@
 #pragma once
 //C++数据结构与算法分析 6-15
-
+#include<iostream>
 
 template<class T> class SplayTree;
 
@@ -49,11 +49,69 @@ protected:
 	void rotateL(SplayingNode<T>* p);
 	void continueRotation(SplayingNode<T>* gr, SplayingNode<T>*par, SplayingNode<T>*ch, SplayingNode<T>*desc);
 
-	void semisplay(SplayingNode<T>* n);
-	void inorder(SplayingNode<T>*n);
+	void semisplay(SplayingNode<T>* p);
+	void inorder(SplayingNode<T>*p);
 	void virtual visit(SplayingNode<T>* n) {};
 
 };
+
+template<class T>
+T * SplayTree<T>::search(const T &el)
+{
+	SplayingNode<T>*p = root;
+	while (p != 0)
+	{
+		if (p->info == el)
+		{
+			semisplay(p);
+			return &p->info;
+		}
+		else if (el < p->info)
+		{
+			p = p->left;
+		}
+		else
+			p = p->right;
+	}
+	return NULL;
+}
+
+template<class T>
+void SplayTree<T>::insert(const T &el)
+{
+	SplayingNode<T>*p = root, *prev = 0, *newNode;
+	while (p != 0)
+	{
+		prev = p;
+		if (el < p->info)
+		{
+			p = p->left;
+		}
+		else
+		{
+			p = p->right;
+		}
+	}
+
+	if ((newNode = new SplayingNode<T>(el, 0, 0, prev)) == 0)
+	{
+		std::cout << "No room for new nodes\n";
+		exit(1);
+	}
+
+	if (root == 0)
+	{
+		root = newNode;
+	}
+	else if (el < prev->info)
+	{
+		prev->left = newNode;
+	}
+	else
+	{
+		prev->right = newNode;
+	}
+}
 
 template<class T>
 void SplayTree<T>::rotateR(SplayingNode<T>* p)
@@ -87,6 +145,64 @@ void SplayTree<T>::continueRotation(SplayingNode<T>* gr, SplayingNode<T>* par, S
 
 	par->parent = ch;
 	ch->parent = gr;
+}
+
+template<class T>
+void SplayTree<T>::semisplay(SplayingNode<T>* p)
+{
+	while (p != root)
+	{
+		if (p->parent->parent == 0)
+		{
+			if (p->parent->left == p)
+			{
+				rotateR(p);
+			}
+			else
+			{
+				rotateL(p);
+			}
+		}
+		else if (p->parent->left == p)
+		{
+			if (p->parent->parent->left == p->parent)
+			{
+				rotateR(p->parent);
+				p = p->parent;
+			}
+			else {
+				rotateR(p);
+				rotateL(p);
+			}
+		}
+		else {
+			if (p->parent->parent->right == p->parent)
+			{
+				rotateL(p->parent);
+				p = p->parent;
+			}
+			else {
+				rotateL(p);
+				rotateR(p);
+			}
+		}
+
+		if (root == 0)
+		{
+			root = p;
+		}
+	}
+}
+
+template<class T>
+void SplayTree<T>::inorder(SplayingNode<T>* p)
+{
+	if (p != 0)
+	{
+		inorder(p->left);
+		visit(p);
+		inorder(p->right);
+	}
 }
 
 

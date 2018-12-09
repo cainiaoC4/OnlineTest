@@ -3,6 +3,7 @@
 
 #include"TSLLNode.h"
 #include"TSLList.h"
+#include"useSTL_Sort.h"
 #include <iostream>
 using namespace std;
 
@@ -32,5 +33,10 @@ int main()
 	A.showAll();*/
 
 	//cout << p->info << endl;
+
+
+	int a[] = { 1,4,3,6,7,2,5 };
+	vector<int> v1(a, a + 7), v2(a, a + 7), v3(6, 9), v4(6, 9);
+
 	return 0;
 }

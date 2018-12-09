@@ -158,6 +158,7 @@
     <ClInclude Include="IntSLLNode.h" />
     <ClInclude Include="TSLList.h" />
     <ClInclude Include="TSLLNode.h" />
+    <ClInclude Include="useSTL_Sort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

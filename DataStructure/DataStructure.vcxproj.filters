@@ -56,5 +56,8 @@
     <ClInclude Include="genSplay.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="useSTL_Sort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

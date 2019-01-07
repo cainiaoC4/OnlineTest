@@ -1,29 +1,30 @@
 #include<iostream>
+#include<list>
+#include<map>
 #include<vector>
-//#include <stdio.h>
-#include<cmath>
-#include<iomanip>
+#include<utility>
 #include<algorithm>
+#include<cmath>
 using namespace std;
 
 
+template <typename T>
+class print {
+public:
+	void operator() (const T& elem)
+	{
+		cout << elem << ' ';
+	}
+};
 
 
 int main()
 {
-	/*Base1 base1(1);
-	Base2 base2(2);
-	Base3 base3;
+	int iap[6] = { 0,1,2,3,4,5 };
 
-	fun(&base1);
-	fun(&base2);
-	fun(&base3);*/
-	//Derived obj(1, 2, 3, 4);
+	vector<int> iv(iap, iap + 6);
 
-	char**strNum = (char**)(new int[5]);
-	//char**strNum = static_cast<char**>(new int[5]);
-	char** test = new char*[5];
+	//print<int>()是一个暂存对象，不是一个函数呼叫动作
+	for_each(iv.begin(), iv.end(), print<int>());
 
-	const char* A = "abdc";
-	return 0;
 }

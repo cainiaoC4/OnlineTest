@@ -1,30 +1,39 @@
-#include<iostream>
-#include<list>
-#include<map>
-#include<vector>
-#include<utility>
-#include<algorithm>
-#include<cmath>
-using namespace std;
+#include <iostream>  
+#include<cstring>
 
 
-template <typename T>
-class print {
-public:
-	void operator() (const T& elem)
-	{
-		cout << elem << ' ';
-	}
-};
+std::string(&funcs(int i))[10];
 
 
-int main()
+
+int main(int argc, char *argv[])
+
 {
-	int iap[6] = { 0,1,2,3,4,5 };
 
-	vector<int> iv(iap, iap + 6);
+//	stlport::crope myrope("Hello world!");
+//
+//	/*std::cout << myrope << std::endl;
+//	stlport::printf(myrope);
+//*/
+//	system("pause");
 
-	//print<int>()是一个暂存对象，不是一个函数呼叫动作
-	for_each(iv.begin(), iv.end(), print<int>());
+	using F = int(*)(int*, int);
+
+	int odd[] = { 1,3,5,7,9 };
+	decltype(odd) *arrPtr(int i);
+
+	std::string tenS[] = { "1" ,"2" ,"3" ,"4" ,"5" ,"6" ,"7" ,"8" ,"9" ,"10" };
+
+	auto func(int i)->std::string(&)[10];
+
+	decltype(tenS) &arrPref(int i);           //只是声明，若使用，链接器报错
+
+
+
+
+	//std::cout<<arrPref(1);
+
+	return 0;
 
 }
+

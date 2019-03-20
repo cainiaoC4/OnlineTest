@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="EightChapter.h" />
     <ClInclude Include="NineChapter.h" />
+    <ClInclude Include="TenChapter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

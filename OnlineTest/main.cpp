@@ -8,6 +8,7 @@
 
 #include"EightChapter.h"
 #include"NineChapter.h"
+#include"TenChapter.h"
 using namespace std;
 
 class Base1 {
@@ -105,17 +106,22 @@ int main(int argc,char*argv[])
 	//Derived obj(1, 2, 3, 4);
 
 	///==========================================
-	string fileName ="x.txt";
+	//string fileName ="x.txt";
 
-	//Func_8_10(fileName);
-	//Func_8_11();
+	////Func_8_10(fileName);
+	////Func_8_11();
 
-	list<int> test = { 1,2,3,4,5,6 };
+	//list<int> test = { 1,2,3,4,5,6 };
 
-	ListInt2VecDouble(test);
+	//ListInt2VecDouble(test);
 
-	list<const char*> test2 = { "we","are","right" };
-	ListCharPtr2VecString(test2);
+	//list<const char*> test2 = { "we","are","right" };
+	//ListCharPtr2VecString(test2);
+
+	//Func_10_2();
+
+	Func_10_X<int>();
+
 	//ifstream input(fileName);
 	//vector<string> vec;
 	//if (input)

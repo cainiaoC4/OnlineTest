@@ -7,6 +7,8 @@
 #include<fstream>
 #include<sstream>
 
+#include<numeric>
+
 //std::istream& myStreamLearn(std::istream& i)
 //{
 //	std::string mm;
@@ -39,7 +41,7 @@ std::istream& FillTVector(std::istream&i, std::vector<T>& v)
 
 
 void Func_10_1()
-{
+{//存在问题
 	std::cout << "Set Your <int> Vector" << std::endl;
 	std::vector<int> myVec;
 	FillTVector(std::cin, myVec);
@@ -55,7 +57,7 @@ void Func_10_1()
 }
 
 void Func_10_2()
-{
+{//存在问题
 	std::cout << "Set Your <string> Vector" << std::endl;
 	std::vector<std::string> myVec;
 	FillTVector(std::cin, myVec);
@@ -78,7 +80,7 @@ void Func_10_X()
 	std::vector<T> myVec;
 	FillTVector(std::cin, myVec);
 
-	if (std::cin.failbit)
+	if (std::cin.bad())
 	{
 		std::cout << " 写入Vector错误，有可能类型问题" << std::endl;
 	}
@@ -100,6 +102,22 @@ void Func_10_X()
 
 	}
 	
+}
 
-	
+
+void Func_10_3()
+{
+	std::cout << "Set Your <int> Vector" << std::endl;
+	std::vector<int> myVec;
+	FillTVector(std::cin, myVec);
+
+	if (std::cin.failbit)
+	{
+		std::cout << " 写入Vector错误，有可能类型问题" << std::endl;
+	}
+	else
+	{
+		int result = std::accumulate(myVec.begin(), myVec.end(), 0);
+		std::cout << "Vector<int> 总和为 " << result << std::endl;
+	}
 }

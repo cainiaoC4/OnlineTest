@@ -122,6 +122,7 @@ int main(int argc,char*argv[])
 
 	Func_10_X<int>();
 
+	//Func_10_3();
 	//ifstream input(fileName);
 	//vector<string> vec;
 	//if (input)

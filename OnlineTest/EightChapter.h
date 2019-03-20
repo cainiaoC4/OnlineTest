@@ -58,17 +58,25 @@ void Func_8_11()
 }
 
 
-void Func_8_13()
+void Func_8_13(std::string fileName)
 {
 
-	vector<PersonInfo> people;
-	for (const auto &entry : people)
+	std::string line, word;
+	std::vector<PersonInfo> people;
+	std::istringstream record;
+
+	std::ifstream fStream(fileName);
+	while (std::getline(fStream, line))
 	{
-		std::ostringstream formatted, badNums;
-		for (const auto &nums : entry.phones)
+		PersonInfo info;
+		record.clear();
+		record.str(line);
+		record >> info.name;
+		while (record >> word)
 		{
-			//if(valid(nums))
+			info.phones.push_back(word);
 		}
+		people.push_back(info);
 	}
 }
 

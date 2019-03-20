@@ -111,7 +111,7 @@ void Func_10_3()
 	std::vector<int> myVec;
 	FillTVector(std::cin, myVec);
 
-	if (std::cin.failbit)
+	if (std::cin.bad())
 	{
 		std::cout << " 写入Vector错误，有可能类型问题" << std::endl;
 	}
@@ -120,4 +120,20 @@ void Func_10_3()
 		int result = std::accumulate(myVec.begin(), myVec.end(), 0);
 		std::cout << "Vector<int> 总和为 " << result << std::endl;
 	}
+}
+
+
+void Func_10_5()
+{
+	/*const char*a = "Watme";
+	const char*b = "hellU";
+	const char* c = "Watme";*/
+	std::vector<const char*> a = {"Watme","HellU","Byeme","Tok"};
+	std::vector<const char*> b = { "Watme","HellU","Byeme","Tok" };
+	std::vector<const char*> c = { "Watme","HellxU","Byemex","Toxk" };
+	//std::cout << a[0] << std::endl;
+
+	bool result =std::equal(a.begin(), a.end(), c.begin());
+
+	std::cout << result << std::endl;
 }

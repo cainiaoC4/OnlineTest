@@ -120,9 +120,10 @@ int main(int argc,char*argv[])
 
 	//Func_10_2();
 
-	Func_10_X<int>();
+	//Func_10_X<int>();
 
 	//Func_10_3();
+	Func_10_5();
 	//ifstream input(fileName);
 	//vector<string> vec;
 	//if (input)

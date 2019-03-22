@@ -26,6 +26,20 @@ std::istream& FillintVector(std::istream& i, std::vector<int> &v)
 
 }
 
+
+template<typename T>
+void PrintVectorElem(std::vector<T> &v)
+{
+	auto index = v.begin();
+	std::cout << "Vector Size is " << v.size() << std::endl;
+
+	for (; index < v.end(); ++index)
+	{
+		std::cout << (*index) << std::endl;
+	}
+
+}
+
 template<typename T>
 std::istream& FillTVector(std::istream&i, std::vector<T>& v)
 {
@@ -136,4 +150,52 @@ void Func_10_5()
 	bool result =std::equal(a.begin(), a.end(), c.begin());
 
 	std::cout << result << std::endl;
+}
+
+
+void Func_10_6() {
+
+	std::cout << "Set Your <int> Vector" << std::endl;
+	std::vector<int> myVec;
+	FillTVector(std::cin, myVec);
+
+	if (std::cin.bad())
+	{
+		std::cout << " 写入Vector错误，有可能类型问题" << std::endl;
+	}
+	else
+	{
+		std::cout << "print the vector" << std::endl;
+
+		PrintVectorElem(myVec);
+
+		std::cout << "Now try fill_n to set elem in 0" << std::endl;
+		std::fill_n(myVec.begin(),myVec.size(),0);
+
+		PrintVectorElem(myVec);
+		//myVec.reserve()
+	}
+
+}
+
+
+void Func_10_7_1()
+{
+	std::vector<int> vec; std::list<int> lst; int  i;
+
+	while (std::cin >> i)
+	{
+		lst.push_back(i);
+	}
+
+	vec.reserve(lst.size());
+	copy(lst.cbegin(), lst.cend(), vec.begin());
+}
+
+
+void Func_10_7_2()
+{
+	std::vector<int> vec;
+	vec.reserve(10);
+	fill_n(vec.begin(), 10, 0);
 }

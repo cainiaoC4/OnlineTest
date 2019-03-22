@@ -94,6 +94,24 @@ void OpenFileAndOutPut(char*argv1,char*argv2)
 
 }
 
+struct AAA
+{
+	int a;
+	char b;
+};
+
+int mystrlen(const char* str)
+{
+	int count = 0;
+	while ((*str) != '\0')
+	{
+		++count;
+		str++;
+	}
+
+	return count;
+}
+
 int main(int argc,char*argv[])
 {
 	/*Base1 base1(1);
@@ -123,7 +141,30 @@ int main(int argc,char*argv[])
 	//Func_10_X<int>();
 
 	//Func_10_3();
-	Func_10_5();
+	//Func_10_5();
+	//Func_10_6();
+	//Func_10_7_2();
+
+	/*char a[10];
+	cout << strlen(a) << " " << sizeof(a) << endl;*/
+	
+	//cout << sizeof(AAA);
+
+	//int a = mystrlen("wat");
+
+	//int a = 0;
+	//int b = 1;
+	//int c = -2;
+
+	//int n1 = a / b;
+	//int n2 = b / c;
+	////int n3 = b / a;
+	//int n4 = a / c;
+
+	//cout << n1 << n2 << n4;
+	
+	
+
 	//ifstream input(fileName);
 	//vector<string> vec;
 	//if (input)
@@ -186,3 +227,15 @@ int main(int argc,char*argv[])
 
 	return 0;
 }
+
+//template<typename T>
+//void elim(vector<T> &v)
+//{
+//	sort(v.begin(), v.end());
+//
+//	auto end_unique = unique(v.begin(), v.end());
+//
+//	words.erase(end_unique, v.end());
+//}
+
+

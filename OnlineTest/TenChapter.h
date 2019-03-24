@@ -199,3 +199,44 @@ void Func_10_7_2()
 	vec.reserve(10);
 	fill_n(vec.begin(), 10, 0);
 }
+
+void elimDups(std::vector<std::string> &words)
+{
+
+	sort(words.begin(), words.end());
+
+	auto end_unique = unique(words.begin(), words.end());
+
+	words.erase(end_unique, words.end());
+}
+
+bool isShorter(const std::string &s1, const std::string &s2)
+{
+	return s1.size() < s2.size();
+}
+
+
+void Func_10_11()
+{
+	std::vector<std::string> mywords;
+
+	FillTVector(std::cin, mywords);
+	stable_sort(mywords.begin(), mywords.end(), isShorter);
+
+	PrintVectorElem(mywords);
+}
+
+
+bool myPredicate(const std::string &s1)
+{
+	return s1.size() > 5;
+}
+void Func_10_13()
+{
+	std::vector<std::string> mywords;
+	FillTVector(std::cin, mywords);
+
+	partition(mywords.begin(), mywords.end(), myPredicate);
+
+	PrintVectorElem(mywords);
+}

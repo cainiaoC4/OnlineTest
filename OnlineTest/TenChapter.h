@@ -218,6 +218,7 @@ bool isShorter(const std::string &s1, const std::string &s2)
 
 void Func_10_11()
 {
+	//编写程序使用stable_sort和isShorter将vector排序并验证输出
 	std::vector<std::string> mywords;
 
 	FillTVector(std::cin, mywords);
@@ -240,3 +241,13 @@ void Func_10_13()
 
 	PrintVectorElem(mywords);
 }
+
+//lambda特性
+//可以向一个算法传递任何类别的callable object。即如果e是一个可调用的表达式，则我们可以编写代码e(args).
+//lambda表达式表示一个可调用的代码单元，一个lambda具有一个返回类型、一个参数列表、一个函数体，但与函数不同，它可以定义在函数内部。
+//[capture list](parameter list)->return type{function body}
+//capture list是一个lambda所在函数中定义的局部变量的列表。
+// auto f =[]{return 42;}
+//cout << f() << endl;
+
+

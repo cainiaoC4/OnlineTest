@@ -21,10 +21,10 @@
 //}
 
 
-std::istream& FillintVector(std::istream& i, std::vector<int> &v)
-{
-
-}
+//std::istream& FillintVector(std::istream& i, std::vector<int> &v)
+//{
+//
+//}
 
 
 template<typename T>
@@ -228,6 +228,7 @@ void Func_10_11()
 }
 
 
+
 bool myPredicate(const std::string &s1)
 {
 	return s1.size() > 5;
@@ -237,6 +238,7 @@ void Func_10_13()
 	std::vector<std::string> mywords;
 	FillTVector(std::cin, mywords);
 
+	//partition 使谓词为true的值将排在容器的前半部分。
 	partition(mywords.begin(), mywords.end(), myPredicate);
 
 	PrintVectorElem(mywords);
@@ -249,6 +251,46 @@ void Func_10_13()
 //capture list是一个lambda所在函数中定义的局部变量的列表。
 // auto f =[]{return 42;}
 //cout << f() << endl;
+//空capture list 表明lambda不使用它所在函数中的任何局部变量
+//stable_sort(word.begin(),words.end(),[](const string &a,const string &b){return a.size()<b.size();})
 
 
+void biggies(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
 
+	stable_sort(words.begin(), words.end(), isShorter);
+
+	auto l = find_if(words.begin(), words.end(), [sz](const std::string &a) {return a.size() >= sz; });
+	auto count = words.end() - l;
+	std::cout << count << std::endl;
+
+	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });//可以直接定义在iostream文件内的变量
+}
+
+void Func_10_14(int m,int n)
+{
+	auto f = [](int a, int b) {return a + b; };
+	std::cout << f(m,n) << std::endl;
+}
+
+void Func_10_15(int m)
+{
+	auto f = [m](int a) {return m + a; };
+	std::cout << f(5) << std::endl;
+}
+
+void Func_10_18(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	stable_sort(words.begin(), words.end(), isShorter);
+
+	//auto l = find_if(words.begin(), words.end(), [sz](const std::string &a) {return a.size() >= sz; });
+	auto l = partition(words.begin(), words.end(), [sz](const std::string &a) {return a.size() <= sz; });
+	auto count = words.end() - l;
+	std::cout << count << std::endl;
+
+	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });//可以直接定义在iostream文件内的变量
+
+}

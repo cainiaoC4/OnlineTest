@@ -163,8 +163,11 @@ int main(int argc,char*argv[])
 
 	//cout << n1 << n2 << n4;
 	
-	Func_10_13();
+	//Func_10_13();
+	std::vector<std::string> myVec;
+	FillTVector(std::cin,myVec);
 
+	Func_10_18(myVec,5);
 	//ifstream input(fileName);
 	//vector<string> vec;
 	//if (input)

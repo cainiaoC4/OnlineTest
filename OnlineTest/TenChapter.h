@@ -6,6 +6,7 @@
 #include<iostream>
 #include<fstream>
 #include<sstream>
+#include<functional>
 
 #include<numeric>
 
@@ -34,6 +35,19 @@ void PrintVectorElem(std::vector<T> &v)
 	std::cout << "Vector Size is " << v.size() << std::endl;
 
 	for (; index < v.end(); ++index)
+	{
+		std::cout << (*index) << std::endl;
+	}
+
+}
+
+template<typename T>
+void PrintListElem(std::list<T> &v)
+{
+	auto index = v.begin();
+	std::cout << "List Size is " << v.size() << std::endl;
+
+	for (; index != v.end(); ++index)
 	{
 		std::cout << (*index) << std::endl;
 	}
@@ -293,4 +307,76 @@ void Func_10_18(std::vector<std::string> &words, std::vector<std::string>::size_
 
 	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });//可以直接定义在iostream文件内的变量
 
+}
+
+void Func_10_20(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	//stable_sort(words.begin(), words.end(), isShorter);
+	int i = count_if(words.begin(), words.end(), [sz](std::string &a) {return a.size() > sz; });
+	std::cout << i << std::endl;
+}
+
+//10_21
+void Func_10_21(int a)
+{
+	auto f = [a]()mutable->bool {if (a > 0) --a; else return a == 0; };
+}
+
+
+bool LongerthanNum(std::string &s,int sz)
+{
+	return s.size() > sz;
+}
+
+bool ShorterthanNum(std::string &s, int sz)
+{
+	return s.size() <= sz;
+}
+
+bool checksize(const std::string &s, std::string::size_type sz)
+{
+	//return s.size() > sz;
+	return s.size() < sz;
+}
+
+
+void Func_10_22(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	auto i = count_if(words.begin(), words.end(), bind(ShorterthanNum,std::placeholders::_1,sz));
+
+	std::cout << i << std::endl;
+}
+
+void Func_10_24(std::vector<int> &vec,const std::string &s)
+{
+	auto l = find_if(vec.begin(), vec.end(), bind(checksize, s,std::placeholders::_1 ));
+
+	std::cout << *l << std::endl;
+}
+
+void Func_10_25(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	stable_sort(words.begin(), words.end(), isShorter);
+
+	//auto l = find_if(words.begin(), words.end(), [sz](const std::string &a) {return a.size() >= sz; });
+	//auto l = partition(words.begin(), words.end(), [sz](const std::string &a) {return a.size() <= sz; });
+	auto l = partition(words.begin(), words.end(), bind(checksize,std::placeholders::_1,sz));
+	auto count = words.end() - l;
+	std::cout << count << std::endl;
+
+	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });
+
+}
+
+template<typename T>
+void Func_10_27(std::vector<T> &vec,std::list<T>& newl)
+{
+	unique_copy(vec.begin(), vec.end(), back_inserter(newl));
+	PrintListElem(newl);
 }

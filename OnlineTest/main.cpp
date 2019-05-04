@@ -165,9 +165,18 @@ int main(int argc,char*argv[])
 	
 	//Func_10_13();
 	std::vector<std::string> myVec;
+	//std::vector<int> myVec;
 	FillTVector(std::cin,myVec);
 
-	Func_10_18(myVec,5);
+	std::string s = "myWords";
+	//Func_10_24(myVec, s);
+	//Func_10_18(myVec,5);
+	//Func_10_22(myVec, 6);
+	//Func_10_25(myVec, 6);
+
+	std::list<std::string> mylist;
+	Func_10_27(myVec, mylist);
+
 	//ifstream input(fileName);
 	//vector<string> vec;
 	//if (input)

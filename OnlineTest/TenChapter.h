@@ -6,6 +6,7 @@
 #include<iostream>
 #include<fstream>
 #include<sstream>
+#include<functional>
 
 #include<numeric>
 
@@ -21,10 +22,10 @@
 //}
 
 
-std::istream& FillintVector(std::istream& i, std::vector<int> &v)
-{
-
-}
+//std::istream& FillintVector(std::istream& i, std::vector<int> &v)
+//{
+//
+//}
 
 
 template<typename T>
@@ -34,6 +35,19 @@ void PrintVectorElem(std::vector<T> &v)
 	std::cout << "Vector Size is " << v.size() << std::endl;
 
 	for (; index < v.end(); ++index)
+	{
+		std::cout << (*index) << std::endl;
+	}
+
+}
+
+template<typename T>
+void PrintListElem(std::list<T> &v)
+{
+	auto index = v.begin();
+	std::cout << "List Size is " << v.size() << std::endl;
+
+	for (; index != v.end(); ++index)
 	{
 		std::cout << (*index) << std::endl;
 	}
@@ -218,6 +232,7 @@ bool isShorter(const std::string &s1, const std::string &s2)
 
 void Func_10_11()
 {
+	//编写程序使用stable_sort和isShorter将vector排序并验证输出
 	std::vector<std::string> mywords;
 
 	FillTVector(std::cin, mywords);
@@ -225,6 +240,7 @@ void Func_10_11()
 
 	PrintVectorElem(mywords);
 }
+
 
 
 bool myPredicate(const std::string &s1)
@@ -236,14 +252,131 @@ void Func_10_13()
 	std::vector<std::string> mywords;
 	FillTVector(std::cin, mywords);
 
+	//partition 使谓词为true的值将排在容器的前半部分。
 	partition(mywords.begin(), mywords.end(), myPredicate);
-	//partition算法接受一个谓词，对容器内容进行划分，使得谓词为true的值会排在容器的前半部分，使谓词为false的值会排在后半部分。
-	//返回一个迭代器，指向最后一个使谓词为true的元素之后的位置。
+
 	PrintVectorElem(mywords);
 }
 
-void biggies(std::vector<std::string> &words, vector<std::string>::size_type sz)
+//lambda特性
+//可以向一个算法传递任何类别的callable object。即如果e是一个可调用的表达式，则我们可以编写代码e(args).
+//lambda表达式表示一个可调用的代码单元，一个lambda具有一个返回类型、一个参数列表、一个函数体，但与函数不同，它可以定义在函数内部。
+//[capture list](parameter list)->return type{function body}
+//capture list是一个lambda所在函数中定义的局部变量的列表。
+// auto f =[]{return 42;}
+//cout << f() << endl;
+//空capture list 表明lambda不使用它所在函数中的任何局部变量
+//stable_sort(word.begin(),words.end(),[](const string &a,const string &b){return a.size()<b.size();})
+
+
+void biggies(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
 {
 	elimDups(words);
+
 	stable_sort(words.begin(), words.end(), isShorter);
+
+	auto l = find_if(words.begin(), words.end(), [sz](const std::string &a) {return a.size() >= sz; });
+	auto count = words.end() - l;
+	std::cout << count << std::endl;
+
+	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });//可以直接定义在iostream文件内的变量
+}
+
+void Func_10_14(int m,int n)
+{
+	auto f = [](int a, int b) {return a + b; };
+	std::cout << f(m,n) << std::endl;
+}
+
+void Func_10_15(int m)
+{
+	auto f = [m](int a) {return m + a; };
+	std::cout << f(5) << std::endl;
+}
+
+void Func_10_18(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	stable_sort(words.begin(), words.end(), isShorter);
+
+	//auto l = find_if(words.begin(), words.end(), [sz](const std::string &a) {return a.size() >= sz; });
+	auto l = partition(words.begin(), words.end(), [sz](const std::string &a) {return a.size() <= sz; });
+	auto count = words.end() - l;
+	std::cout << count << std::endl;
+
+	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });//可以直接定义在iostream文件内的变量
+
+}
+
+void Func_10_20(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	//stable_sort(words.begin(), words.end(), isShorter);
+	int i = count_if(words.begin(), words.end(), [sz](std::string &a) {return a.size() > sz; });
+	std::cout << i << std::endl;
+}
+
+//10_21
+void Func_10_21(int a)
+{
+	auto f = [a]()mutable->bool {if (a > 0) --a; else return a == 0; };
+}
+
+
+bool LongerthanNum(std::string &s,int sz)
+{
+	return s.size() > sz;
+}
+
+bool ShorterthanNum(std::string &s, int sz)
+{
+	return s.size() <= sz;
+}
+
+bool checksize(const std::string &s, std::string::size_type sz)
+{
+	//return s.size() > sz;
+	return s.size() < sz;
+}
+
+
+void Func_10_22(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	auto i = count_if(words.begin(), words.end(), bind(ShorterthanNum,std::placeholders::_1,sz));
+
+	std::cout << i << std::endl;
+}
+
+void Func_10_24(std::vector<int> &vec,const std::string &s)
+{
+	auto l = find_if(vec.begin(), vec.end(), bind(checksize, s,std::placeholders::_1 ));
+
+	std::cout << *l << std::endl;
+}
+
+void Func_10_25(std::vector<std::string> &words, std::vector<std::string>::size_type sz)
+{
+	elimDups(words);
+
+	stable_sort(words.begin(), words.end(), isShorter);
+
+	//auto l = find_if(words.begin(), words.end(), [sz](const std::string &a) {return a.size() >= sz; });
+	//auto l = partition(words.begin(), words.end(), [sz](const std::string &a) {return a.size() <= sz; });
+	auto l = partition(words.begin(), words.end(), bind(checksize,std::placeholders::_1,sz));
+	auto count = words.end() - l;
+	std::cout << count << std::endl;
+
+	for_each(l, words.end(), [](const std::string &s) {std::cout << s << " "; });
+
+}
+
+template<typename T>
+void Func_10_27(std::vector<T> &vec,std::list<T>& newl)
+{
+	unique_copy(vec.begin(), vec.end(), back_inserter(newl));
+	PrintListElem(newl);
 }

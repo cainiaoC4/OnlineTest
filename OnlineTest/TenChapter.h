@@ -237,6 +237,13 @@ void Func_10_13()
 	FillTVector(std::cin, mywords);
 
 	partition(mywords.begin(), mywords.end(), myPredicate);
-
+	//partition算法接受一个谓词，对容器内容进行划分，使得谓词为true的值会排在容器的前半部分，使谓词为false的值会排在后半部分。
+	//返回一个迭代器，指向最后一个使谓词为true的元素之后的位置。
 	PrintVectorElem(mywords);
+}
+
+void biggies(std::vector<std::string> &words, vector<std::string>::size_type sz)
+{
+	elimDups(words);
+	stable_sort(words.begin(), words.end(), isShorter);
 }
